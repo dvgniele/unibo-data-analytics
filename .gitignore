@@ -1,3 +1,5 @@
 trash/
-data/ml-25m/
-data/ml-25m.zip
+ml-25m/
+ml-25m.zip
+__pycache__/
+locals/
