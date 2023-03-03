@@ -4,3 +4,4 @@ ml-25m.zip
 __pycache__/
 locals/
 .pt_tmp/
+*.csv
