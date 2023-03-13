@@ -1,0 +1,17 @@
+\documentclass[../../Report.tex]{subfiles}
+\usepackage[italian]{babel}
+
+\begin{document}
+\chapter{Implementazione}
+\section{Data Preprocessing}
+La fase di preprocessing dei dati consiste nel preparare i dati per l'addestramento del modello.
+Una volta acqusiti i dati e averne studiato le peculiaritá e le caratteristiche, si procede con la pulizia dei dati.
+
+Abbiamo usato il metodo \textit{pivot\_table} di Pandas per creare una tabella pivot che contiene i genome-score degli utenti per ogni film che lo possiede(andando cosi a ridurre la cardialita' da 60k a 13.816).
+In seguito a cio' verra' effettuata una merge con un i generi dei film applicando una One-Hot Encoding, attraverso la funzione \textit{get\_dummies()}.
+Ci siamo inoltre andati a focalizzare sui voti da parte degli utenti, raggruppandoli per film ci abbiamo calcolato la media dei voti.
+
+\section{Modeling}
+
+\section*{Tabular Data}
+\end{document}
