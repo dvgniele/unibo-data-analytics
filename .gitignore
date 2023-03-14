@@ -18,3 +18,4 @@ locals/
 *.synctex.gz
 *.toc
 
+report/report.synctex(busy)
