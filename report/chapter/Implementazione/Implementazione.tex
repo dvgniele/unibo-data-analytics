@@ -5,31 +5,32 @@
 \chapter{Implementazione}
 \section{Data Preprocessing}
 La fase di preprocessing dei dati consiste nel preparare i dati per l'addestramento del modello.
-Una volta acqusiti i dati e averne studiato le peculiaritá e le caratteristiche, si procede con la pulizia dei dati.
-Abbiamo usato il metodo \textit{pivot\_table} di Pandas per creare una tabella pivot che contiene i genome-score degli utenti per ogni film che lo possiede(andando cosi a ridurre la cardialita' da 60k a 13.816).\\
-In seguito a ció verrá effettuata una merge con un i generi dei film applicando una One-Hot Encoding, attraverso la funzione \textit{get\_dummies()}.
+Una volta acqusiti i dati e averne studiato le peculiarità e le caratteristiche, si procede con la pulizia dei dati.
+Abbiamo usato il metodo \textit{pivot\_table} di Pandas per creare una tabella pivot che contiene i genome-score degli utenti per ogni film che lo possiede (andando così a ridurre la cardialità da 60k a 13.816).\\
+In seguito a cià verrà effettuata una merge con un i generi dei film.
 Ci siamo inoltre andati a focalizzare sui voti da parte degli utenti, raggruppandoli per film ci abbiamo calcolato la media dei voti.
-Quest'ultimo capo sará il nostro \textit{target} per l'addestramento del modello.\\
+Quest'ultimo capo sarà il nostro \textit{target} per l'addestramento del modello.\\
 
 \section{Modeling}
-La nostra fase di modellazione include uno studio di regressione basato sulla predizione del voto medio di un film dati i suoi genome-score(ed in seguito anche i generi).
-Abbiamo inoltre applicato una tecnica di \textit{PCA} per ridurre la cardinalitá dei dati, ma non abbiamo ottenuto risultati soddisfacenti, quindi abbiamo deciso di non applicarla.\\
+La nostra fase di modellazione include uno studio di regressione basato sulla predizione del voto medio di un film dati i suoi genome-score (ed in seguito anche i generi).
+Abbiamo inoltre applicato una tecnica di \textit{PCA} per ridurre la cardinalità dei dati, ma senza ottenere risultati soddisfacenti, quindi è stato deciso di non farne uso ulteriormente.\\
 
 Eseguiamo il train-test split con un rapporto 80-20 ed in seguito addestreremo il nostro modello.
 \subsection{Tecniche di ML Supervisionate con Approccio non-Deep}
 In questa sezione verranno descritte le tecniche di ML supervisionate con approccio non-Deep utilizzate per la predizione del voto medio di un film.
 \begin{itemize}
-    \item \textbf{Linear Regression}: La regressione lineare é una tecnica di ML supervisionata che permette di predire il valore di una variabile dipendente a partire da una o piú variabili indipendenti.
+    \item \textbf{Linear Regression}: La regressione lineare è una tecnica di ML supervisionata che permette di predire il valore di una variabile dipendente a partire da una o più variabili indipendenti.
     \begin{itemize}
-        \item \item \textbf{Lasso}: Lasso é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
+        \item \textbf{Ridge}: Ridge è un algoritmo di regressione lineare che utilizza un termine di regolarizzazione per eviare problemi di multicollinearità. Il parametro di regolarizzazione controlla l'importanza del termine di regolarizzazione nella funzione di costo
+        \item \textbf{Lasso}: Lasso è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
     \end{itemize}
-    \item \textbf{Random Forest}: Random Forest é un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato mediante la creazione di piú alberi (Metodo di Emsable Learning).
-    \item \textbf{SVR}: Support Vector Regression é un algoritmo che cerca di trovare una funzione che minimizzi la distanza tra i dati di training e una fascia di tolleranza definita dall'utente.
-    \item \textbf{KNN}: K-Nearest Neighbors é un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato cerca di stimare il valore di una variabile dipendente su nuovi dati in base alla loro vicinanza ad altri dati di training.
-    \item \textbf{NB Gaussian}: Naive Bayes é un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato mediante la creazione di un modello probabilistico.
+    \item \textbf{Random Forest}: Random Forest è un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato mediante la creazione di più alberi (Metodo di Emsable Learning).
+    \item \textbf{SVR}: Support Vector Regression è un algoritmo che cerca di trovare una funzione che minimizzi la distanza tra i dati di training e una fascia di tolleranza definita dall'utente.
+    \item \textbf{KNN}: K-Nearest Neighbors è un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato cerca di stimare il valore di una variabile dipendente su nuovi dati in base alla loro vicinanza ad altri dati di training.
+    \item \textbf{NB Gaussian}: Naive Bayes è un algoritmo di ML supervisionato che permette di effettuare la classificazione o la regressione di un dato mediante la creazione di un modello probabilistico.
 \end{itemize}
 
-Per ogni modello precedentemente citato é stato applicato il Tuning dei parametri per cercare di ottimizzare il modello.
+Per ogni modello precedentemente citato è stato applicato il Tuning dei parametri per cercare di ottimizzare il modello.
 Attraverso la funzione \textit{RandomizedSearchCV} di Scikit-Learn abbiamo cercato di trovare i migliori parametri per ogni modello.
 
 \subsection{Tecniche di ML Supervisionate con Reti Neurali}
