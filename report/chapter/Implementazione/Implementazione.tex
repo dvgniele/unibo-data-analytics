@@ -214,7 +214,44 @@ I parametri che abbiamo utilizzato sono:
         num_epochs = [200,400,600]
     }
 \end{lstlisting}
+I risultati ottenuti sono:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+\textbf{batchsize}& 1024 & 256\\
+\textbf{hidden\_size1}& 256 &  128 \\
+\textbf{hidden\_size2}& 256 & 256\\
+\textbf{lr}& 0.01 &  0.001\\
+\textbf{num\_epochs}& 400 & 600\\
+\hline
+\end{tabular}
+\end{table}
 
-\section*{Tabular Data}
-
+\section{Tabular Data}
+Per quanto riguarda i Tabular Data abbiamo fatto il tuning dei seguenti iperparametri(sempre utilizzando itertools.product):
+\begin{lstlisting}[language=Python]
+    batchsize = [512,1024,2048]
+    width = [8,16,32]
+    steps = [3,5,7]
+    learning_rate = [2e-2,1e-2,5e-3]    
+    max_epochs = [70,120,150,210]
+\end{lstlisting}
+dove $width$ corrisponde a $n\_d$ e $n\_a$ dove $n\_d$ é la Larghezza del livello di previsione delle decisioni($n_a$ nella documentazione viene consigliato sia uguale a $n_d$, per questo motivo utilizziamo un singolo valore).
+Viene fatto uso di Early Stopping per evitare l'overfitting.
+I risultati ottenuti sono:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+\textbf{batchsize}& 2048 & -\\
+\textbf{width}& 8 &  - \\
+\textbf{steps}& 5 & -\\
+\textbf{learning\_rate}& 0.02 &  -\\
+\textbf{max\_epochs}& 210 & -\\
+\hline
+\end{tabular}
+\end{table}
 \end{document}

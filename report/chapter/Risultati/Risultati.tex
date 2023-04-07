@@ -5,8 +5,15 @@
 \chapter{Risultati}
 In questo capitolo verranno presentati e discussi i risultati ottenuti nelle diverse configurazioni descritte nei capitoli predenti.
 
-
-\section{Classic ML}
+\section{Performance Evaluation}
+Per valutare la qualitá dei modelli di ML Supervisionati Deep e non Deep, sono stati utilizzati i seguenti metri di performance:
+\begin{itemize}
+    \item MSE: Mean Squared Error\\Mean Squared Error (MSE) é una media delle differenze al quadrato tra i valori predetti e quelli reali.
+    \item RMSE: Root Mean Squared Error\\ Root Mean Squared Error (RMSE) é la radice quadrata della media delle differenze al quadrato tra i valori predetti e quelli reali.
+    \item R2: Coefficient of Determination\\ Coefficient of Determination (R2) é una misura di quanto i valori predetti siano vicini ai valori reali.
+    \item MAE: Mean Absolute Error\\ MAE è una media delle differenze assolute tra i valori predetti e quelli reali.
+\end{itemize}
+\section{Tecniche di ML Supervisionate non Deep}
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -98,7 +105,7 @@ Miglior NN
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{# Epochs} \\
+        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{Epochs} \\
         \hline
         1024                & 256                   & 256                   & 0.01          & 400   \\
         \hline
@@ -153,11 +160,7 @@ Miglior TabNet
     \label{tab:best_tabnet}
 \end{table}
 
-
-
-\section{Performance Evaluation}
-
-\section{Performance Evaluation on Tabular Data}
+\section{Conclusioni}
 \end{document}
 
 
