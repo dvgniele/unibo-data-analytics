@@ -5,47 +5,90 @@
 \chapter{Risultati}
 In questo capitolo verranno presentati e discussi i risultati ottenuti nelle diverse configurazioni descritte nei capitoli predenti.
 
-
-\section{Classic ML}
+\section{Performance Evaluation}
+Per valutare la qualitá dei modelli di ML Supervisionati Deep e non Deep, sono stati utilizzati i seguenti metri di performance:
+\begin{itemize}
+    \item MSE: Mean Squared Error\\Mean Squared Error (MSE) é una media delle differenze al quadrato tra i valori predetti e quelli reali.
+    \item RMSE: Root Mean Squared Error\\ Root Mean Squared Error (RMSE) é la radice quadrata della media delle differenze al quadrato tra i valori predetti e quelli reali.
+    \item R2: Coefficient of Determination\\ Coefficient of Determination (R2) é una misura di quanto i valori predetti siano vicini ai valori reali.
+    \item MAE: Mean Absolute Error\\ MAE è una media delle differenze assolute tra i valori predetti e quelli reali.
+\end{itemize}
+\section{Tecniche di ML Supervisionate non Deep}
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Model} & \textbf{MSE} & \textbf{RMSE} & \textbf{R2} & \textbf{MAE} \\
+        \textbf{Model} & \textbf{MSE} & \textbf{RMSE}  & \textbf{MAE} \\
         \hline
-        Linear Regression   & 0.005277524569837709  & 0.0726465730082136    & 0.9779884023114186    & 0.05598534700766051 \\
-        Lasso               & 0.005486814781830245  & 0.07407303680712872   & 0.9771154908004298    & 0.0568421300459931 \\
-        Ridge               & 0.005173317239238808  & 0.0719257759029321    & 0.9784230321851388    & 0.05530627637007967 \\
-        K Neighbors         & 0.04014675063926314   & 0.20036654071791313   & 0.8325551853181739    & 0.15758359542154865 \\
-        SVR                 & 0.004249807698698538  & 0.06519054915168715   & 0.9822748229629815    & 0.049401864388909957 \\
-        Decision Tree R.    & ...              & ...            & ... & ...         \\
-        Random Forest R.    & ...              & ...             & ...  & ...              \\
+        Linear Regression   & 0.005277524569837709  & 0.0726465730082136     & 0.05598534700766051 \\
+        Lasso               & 0.005486814781830245  & 0.07407303680712872    & 0.0568421300459931 \\
+        Ridge               & 0.005173317239238808  & 0.0719257759029321     & 0.05530627637007967 \\
+        K Neighbors         & 0.04014675063926314   & 0.20036654071791313    & 0.15758359542154865 \\
+        SVR                 & 0.004249807698698538  & 0.06519054915168715    & 0.049401864388909957 \\
+        Decision Tree R.    & ...              & ...             & ...         \\
+        Random Forest R.    & ...              & ...               & ...              \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
+    \label{tab:classic_ml_results}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Model}   & \textbf{R2}  \\
+        \hline
+        Linear Regression   &  0.9779884023114186    \\
+        Lasso               & 0.9771154908004298     \\
+        Ridge               & 0.9784230321851388     \\
+        K Neighbors         & 0.8325551853181739     \\
+        SVR                 & 0.9822748229629815    \\
+        Decision Tree R.    & ...         \\
+        Random Forest R.    & ...              \\
+        \hline
+    \end{tabular}
+    
     \label{tab:classic_ml_results}
 \end{table}
 
 Di seguito sono riportati i risultati dei modelli precedenti, ma con l'utilizzo della PCA
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Model} & \textbf{MSE} & \textbf{RMSE} & \textbf{R2} & \textbf{MAE} \\
+        \textbf{Model} & \textbf{MSE} & \textbf{RMSE} & \textbf{MAE} \\
         \hline
-        Linear Regression   & 0.006377020549959092  & 0.07985624928556996   & 0.973402604016331     & 0.06110574164990556   \\
-        Lasso               & 0.009433868123483865  & 0.09712810161577269   & 0.9606530472699164    & 0.07491622588172611   \\
-        Ridge               & 0.0063303117843782316 & 0.07956325649681661   & 0.9735974178050478    & 0.060759651674386066  \\
-        K Neighbors         & 0.03922817004507678   & 0.1980610260628698    & 0.836386418354838     & 0.15566020188713492   \\
-        SVR                 & 0.004886523894752017  & 0.06990367583147554   & 0.9796191952034381    & 0.05318109432495814   \\
-        Decision Tree R.    & ...                   & ...                   & ... & ...         \\
-        Random Forest R.    & 0.0120785827307925    & 0.109902605659704     & 0.949622422368631     & 0.0843575930595669    \\
+        Linear Regression   & 0.006377020549959092  & 0.07985624928556996        & 0.06110574164990556   \\
+        Lasso               & 0.009433868123483865  & 0.09712810161577269       & 0.07491622588172611   \\
+        Ridge               & 0.0063303117843782316 & 0.07956325649681661       & 0.060759651674386066  \\
+        K Neighbors         & 0.03922817004507678   & 0.1980610260628698        & 0.15566020188713492   \\
+        SVR                 & 0.004886523894752017  & 0.06990367583147554      & 0.05318109432495814   \\
+        Decision Tree R.    & ...                   & ...                   & ...         \\
+        Random Forest R.    & 0.0120785827307925    & 0.109902605659704          & 0.0843575930595669    \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:classic_ml_results_pca}
 \end{table}
-
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Model}  & \textbf{R2}  \\
+        \hline
+        Linear Regression    & 0.973402604016331    \\
+        Lasso               & 0.9606530472699164    \\
+        Ridge               & 0.9735974178050478    \\
+        K Neighbors         & 0.836386418354838     \\
+        SVR                 & 0.9796191952034381      \\
+        Decision Tree R.    & ... \\
+        Random Forest R.    & 0.949622422368631       \\
+        \hline
+    \end{tabular}
+    
+    \label{tab:classic_ml_results_pcaR2}
+\end{table}
 
 Miglior Classic ML
 \begin{table}[H]
@@ -57,7 +100,7 @@ Miglior Classic ML
         SVR     & 1  & 0.01   & 0.01    & rbf   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:best_classic_ml}
 \end{table}
 
@@ -71,7 +114,7 @@ Miglior Classic ML con PCA
         SVR     & 100  & 0.01   & 0.001    & rbf   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:best_classic_ml_pca}
 \end{table}
 
@@ -81,29 +124,40 @@ Miglior Classic ML con PCA
 Neural Network Results
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Model} & \textbf{MSE} & \textbf{RMSE} & \textbf{R2} & \textbf{MAE} \\
+        \textbf{Model} & \textbf{MSE} & \textbf{RMSE}  & \textbf{MAE} \\
         \hline
-        NN      & 0.00664011668413877   & 0.0814869105815887    & 0.972389101982116     & 0.0629449188709259    \\
-        NN With PCA    & 0.005938166752457619  & 0.07705949991941452   & 0.9753079414367676    & 0.05929824709892273   \\
+        NN      & 0.00664011668413877   & 0.0814869105815887         & 0.0629449188709259    \\
+        NN With PCA    & 0.005938166752457619  & 0.07705949991941452    & 0.05929824709892273   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
     \label{tab:neural_network_results}
 \end{table}
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Model} & \textbf{R2} \\
+        \hline
+        NN      & 0.972389101982116       \\
+        NN With PCA    & 0.9753079414367676       \\
+        \hline
+    \end{tabular} 
+    \label{tab:neural_network_results}
+\end{table}
 Miglior NN
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{# Epochs} \\
+        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{Epochs} \\
         \hline
         1024                & 256                   & 256                   & 0.01          & 400   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:best_nn}
 \end{table}
 
@@ -112,12 +166,12 @@ Miglior NN con PCA
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{# Epochs} \\
+        \textbf{Batch Size} & \textbf{Input Layer}  & \textbf{Output Layer} & \textbf{lr} & \textbf{\# Epochs} \\
         \hline
         256                & 128                   & 256                   & 0.001          & 600   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:best_nn_pca}
 \end{table}
 
@@ -127,16 +181,30 @@ Miglior NN con PCA
 TabNet Results
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Model} & \textbf{MSE} & \textbf{RMSE} & \textbf{R2} & \textbf{MAE} \\
+        \textbf{Model} & \textbf{MSE} & \textbf{RMSE}  & \textbf{MAE} \\
         \hline
-        TabNet              & 0.00795749657941388   & 0.0892048013248944    & 0.964775228814175     & 0.0689039959039718    \\
-        TabNet With PCA     & 0.005938166752457619  & 0.07705949991941452   & 0.9753079414367676    & 0.05929824709892273   \\
+        TabNet              & 0.00795749657941388   & 0.0892048013248944       & 0.0689039959039718    \\
+        TabNet With PCA     & 0.005938166752457619  & 0.07705949991941452      & 0.05929824709892273   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:tabnet_results}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Model} &  \textbf{R2} \\
+        \hline
+        TabNet              & 0.964775228814175  \\
+        TabNet With PCA     & 0.9753079414367676  \\
+        \hline
+    \end{tabular}
+    
+    \label{tab:tabnet_resultsR2}
 \end{table}
 
 Miglior TabNet
@@ -149,15 +217,11 @@ Miglior TabNet
         ...                & ...                 & ...             & ...          & ...   \\
         \hline
     \end{tabular}
-    \caption{ratings.csv}
+    
     \label{tab:best_tabnet}
 \end{table}
 
-
-
-\section{Performance Evaluation}
-
-\section{Performance Evaluation on Tabular Data}
+\section{Conclusioni}
 \end{document}
 
 
