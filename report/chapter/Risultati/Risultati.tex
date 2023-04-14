@@ -49,7 +49,7 @@ Per valutare la qualitá dei modelli di ML Supervisionati Deep e non Deep, sono 
         \hline
     \end{tabular}
     
-    \label{tab:classic_ml_results}
+    \label{tab:classic_ml_results_2}
 \end{table}
 
 Di seguito sono riportati i risultati dei modelli precedenti, ma con l'utilizzo della PCA
@@ -145,7 +145,7 @@ Neural Network Results
         NN With PCA    & 0.9753079414367676       \\
         \hline
     \end{tabular} 
-    \label{tab:neural_network_results}
+    \label{tab:neural_network_results_2}
 \end{table}
 Miglior NN
 \begin{table}[H]
@@ -186,7 +186,7 @@ TabNet Results
         \textbf{Model} & \textbf{MSE} & \textbf{RMSE}  & \textbf{MAE} \\
         \hline
         TabNet              & 0.00795749657941388   & 0.0892048013248944       & 0.0689039959039718    \\
-        TabNet With PCA     & 0.005938166752457619  & 0.07705949991941452      & 0.05929824709892273   \\
+        TabNet With PCA     & 0.00813222261181444  & 0.0901788368289059      & 0.964001783993923   \\
         \hline
     \end{tabular}
     
@@ -200,7 +200,7 @@ TabNet Results
         \textbf{Model} &  \textbf{R2} \\
         \hline
         TabNet              & 0.964775228814175  \\
-        TabNet With PCA     & 0.9753079414367676  \\
+        TabNet With PCA     & 0.964001783993923  \\
         \hline
     \end{tabular}
     
@@ -214,7 +214,8 @@ Miglior TabNet
         \hline
         \textbf{Batch Size} & \textbf{width}    & \textbf{step} & \textbf{lr}   & \textbf{Max Epochs}\\
         \hline
-        ...                & ...                 & ...             & ...          & ...   \\
+        2048                & 8                 & 5             & 0.02          & 210   \\
+        512 with PCA                & 32                 & 5             & 0.02          & 150   \\
         \hline
     \end{tabular}
     
