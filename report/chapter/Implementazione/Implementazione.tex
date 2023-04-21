@@ -238,6 +238,13 @@ I risultati ottenuti sono:
 \end{tabular}
 \end{table}
 
+Visualizziamo il grafico dell'andamento dei parametri e del Mean Test Score:
+\begin{figure}[h]
+    \centering
+    \includegraphics{hpNN.png}
+    \caption{Andamento dei parametri e del Mean Test Score per la Rete Neurale (senza PCA)}
+\end{figure}
+
 \section{Tabular Data}
 Per quanto riguarda i Tabular Data abbiamo fatto il tuning dei seguenti iperparametri(sempre utilizzando itertools.product):
 \begin{lstlisting}[language=Python]
@@ -263,4 +270,11 @@ I risultati ottenuti sono:
 \hline
 \end{tabular}
 \end{table}
+
+Con un andamento degli iperparametri e del Mean Test Score come segue:
+\begin{figure}
+    \centering
+    \includegraphics{hpTabular.png}
+    \caption{Andamento dei parametri e del Mean Test Score per i Tabular Data (senza PCA)}
+\end{figure}
 \end{document}
