@@ -19,6 +19,3 @@ locals/
 *.toc
 
 report/report.synctex(busy)
-/src/Fun_1/run/
-/src/Fun_1/run_pca
-/src/Fun_2/run/
