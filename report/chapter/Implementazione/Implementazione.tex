@@ -7,13 +7,13 @@
 La fase di preprocessing dei dati consiste nel preparare i dati per l'addestramento del modello.
 Una volta acqusiti i dati e averne studiato le peculiarità e le caratteristiche, si procede con la pulizia dei dati.
 Abbiamo usato il metodo \textit{pivot\_table} di Pandas per creare una tabella pivot che contiene i genome-score degli utenti per ogni film che lo possiede (andando così a ridurre la cardialità da 60k a 13.816).\\
-In seguito a cià verrà effettuata una merge con un i generi dei film.
+In seguito a ciò verrà effettuata una merge con un i generi dei film.
 Ci siamo inoltre andati a focalizzare sui voti da parte degli utenti, raggruppandoli per film ci abbiamo calcolato la media dei voti.
-Quest'ultimo capo sarà il nostro \textit{target} per l'addestramento del modello.\\
+Quest'ultimo sarà il nostro \textit{target} per l'addestramento del modello.\\
 
 \section{Modeling}
-La nostra fase di modellazione include uno studio di regressione basato sulla predizione del voto medio di un film dati i suoi genome-score (ed in seguito anche i generi).
-Abbiamo inoltre applicato una tecnica di \textit{PCA} per ridurre la cardinalità dei dati, ma senza ottenere risultati soddisfacenti, quindi è stato deciso di non farne uso ulteriormente.\\
+La nostra fase di modellazione include uno studio di regressione basato sulla predizione del voto medio di un film dati i suoi genome-score.
+Abbiamo inoltre applicato una tecnica di \textit{PCA} con l'obiettivo di ridurre la cardinalità dei dati, eseguendo l'addestramento sia con che senza la PCA su tutti i modelli al fine di confrontarne i risultati.
 
 Eseguiamo il train-test split con un rapporto 80-20 ed in seguito addestreremo il nostro modello.
 \subsection{Tecniche di ML Supervisionate con Approccio non-Deep}
@@ -35,7 +35,7 @@ Attraverso la funzione \textit{GridSearch} di Scikit-Learn abbiamo cercato di tr
 
 \subsubsection{Tuning dei Parametri}
 Per ogni modello precedentemente citato è stato applicato il Tuning dei parametri per cercare di ottimizzare il modello.
-Attraverso la funzione \textit{GridSearch} di Scikit-Learn abbiamo cercato di trovare i migliori parametri per ogni modello, come segue:
+Attraverso la funzione \textit{GridSearch} di Scikit-Learn abbiamo cercato di trovare i migliori parametri per ogni modello, come nel seguente esempio:
 \begin{lstlisting}[language=Python]
     def tuning(self):
         search = GridSearchCV(estimator = self.svr, param_grid= self.params, cv = 3, n_jobs = 6)
@@ -46,10 +46,10 @@ Attraverso la funzione \textit{GridSearch} di Scikit-Learn abbiamo cercato di tr
 \end{lstlisting}
 \subsection{Linear Regression}
 Il modello di Linear Regression ci permette di operare una regressione lineare tra i nostri dati(una regressione multivariable).
-In questo specifico modello non abbiamo bisogno particolari parametri da fare tuning.
+In questo specifico modello non abbiamo particolari parametri per cui fare tuning.
 Di conseguenza andremo a vedere i risultati del tuning per i modelli che usano la regressione lineare: Lasso e Ridge
 \subsubsection{Ridge}
-Ridge é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
+Ridge è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
 Si basa su un valore di regolarizzazione che permette di evitare problemi di multicollinearità.
 Per cercare il valore $\alpha$ apposito abbiamo utilizzato la funzione \textit{RidgeCV} di Scikit-Learn, che permette di trovare il valore ottimale di $\alpha$, ed effettuare la Cross Validation.
 
@@ -58,14 +58,14 @@ Per cercare il valore $\alpha$ apposito abbiamo utilizzato la funzione \textit{R
     \begin{tabular}{|c|c|c|}
     \hline
 \textbf{Modello} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{Lambda} & 6.0 & 2.5\\ \hline
+\textbf{$\alpha$} & 6.0 & 2.5\\ \hline
 \end{tabular}
 \end{table}
 
 
 \subsubsection{Lasso}
-Lasso é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
-Abbiamo cercato anche qui di ottimizzare il valore $\lambda$ abbiamo utilizzato la funzione \textit{LassoCV} di Scikit-Learn, che permette di trovare il valore ottimale di $\lambda$, ed effettuare la Cross Validation.
+Lasso è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
+Abbiamo cercato anche qui di ottimizzare il valore $\alpha$ abbiamo utilizzato la funzione \textit{LassoCV} di Scikit-Learn, che permette di trovare il valore ottimale di $\alpha$, ed effettuare la Cross Validation.
 
 
 \begin{table}[h]
@@ -76,9 +76,8 @@ Abbiamo cercato anche qui di ottimizzare il valore $\lambda$ abbiamo utilizzato 
 \textbf{Alpha} &  7.425262873115622e-05 &   0.0005675190692206821 \\ \hline
 \end{tabular}
 \end{table}
-
 \subsection{Decision Tree}
-Decision Tree é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un albero di decisione.
+Decision Tree è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un albero di decisione.
 Abbiamo avuto bisogno di fare il tuning di piu parametri, in particolare:
 \begin{lstlisting}[language=Python]
     self.params = {
@@ -91,23 +90,28 @@ Abbiamo avuto bisogno di fare il tuning di piu parametri, in particolare:
     }
 \end{lstlisting}
 Abbiamo utilizzato la funzione \textit{GridSearchCV} di Scikit-Learn per trovare i migliori parametri per il modello, utilizzando un CV di 3 volendo mantenere coerenza con altre ricerche che con una CV maggiore avrebbero portato ad un incremento considerevole del tempo.
-Di seguito i risultati ottenuti:
-\begin{table}[h]
+Di seguito i risultati ottenuti:\\
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{max\_depth}& None & None\\
-\textbf{max\_features}& 'auto' &  'auto' \\
-\textbf{max\_leaf\_nodes}& None & None\\
-\textbf{min\_samples\_leaf}& 20 & 20\\
-\textbf{min\_samples\_split}& 50 & 100\\
-\textbf{splitter}& 'best' &  'best'\\
-\hline
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{max\_depth}& None & None\\
+    \textbf{max\_features}& 'auto' &  'auto' \\
+    \textbf{max\_leaf\_nodes}& None & None\\
+    \textbf{min\_samples\_leaf}& 20 & 20\\
+    \textbf{min\_samples\_split}& 50 & 100\\
+    \textbf{splitter}& 'best' &  'best'\\
+    \hline
 \end{tabular}
 \end{table}
+Mostriamo inoltre il grafico che mostra l'andamento del Mean Test Score in funzione dei parametri, ricordando che nei modelli successivi verrá mostrato il grafico solo con dati senza PCA:
+\begin{figure}[H]
+    \includegraphics[width=.9\textwidth]{hpDT.png}
+    \centering
+\end{figure}
 \subsection{Random Forest}
-Random Forest é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di più alberi (Metodo di Emsable Learning).
+Random Forest è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di più alberi (Metodo di Emsable Learning).
 I parametri su cui effettueremo il tuning sono:
 \begin{lstlisting}[language=Python]
     self.params = {
@@ -119,29 +123,29 @@ I parametri su cui effettueremo il tuning sono:
     }
 \end{lstlisting}
 Ottendendo i seguenti risultati:
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{max\_depth}& None & None\\
-\textbf{max\_features}& 'auto' &  'auto' \\
-\textbf{min\_samples\_leaf}& 1 & 1\\
-\textbf{min\_samples\_split}& 2 & 2\\
-\textbf{n\_estimators}& 500 & 500\\
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{max\_depth}& None & None\\
+    \textbf{max\_features}& 'auto' &  'auto' \\
+    \textbf{min\_samples\_leaf}& 1 & 1\\
+    \textbf{min\_samples\_split}& 2 & 2\\
+    \textbf{n\_estimators}& 500 & 500\\
 \hline
 
 \end{tabular}
 \end{table}
 Qui di seguito inoltre riportiamo un grafico che mostra la distribuzione dei parametri e del Mean Test Score ottenuto:
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics{hpRF.png}
+    \includegraphics[width=.9\textwidth]{HP_RF.png}
 \end{figure}
 
 \subsection{SVR}
-SVR é un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
-Due parametri rilvanti sono C e $\epsilon$: C é il parametro di regolarizzazione, mentre $\epsilon$ é il parametro che permette di definire la tolleranza per il modello.
+SVR è un algoritmo di ML supervisionato che permette di effettuare la regressione di un dato mediante la creazione di un modello lineare.
+Due parametri rilvanti sono C e $\epsilon$: C è il parametro di regolarizzazione, mentre $\epsilon$ è il parametro che permette di definire la tolleranza per il modello.
 \begin{lstlisting}[language=Python]
     self.params = {
         'kernel': ['linear','poly', 'rbf', 'sigmoid'],
@@ -151,25 +155,25 @@ Due parametri rilvanti sono C e $\epsilon$: C é il parametro di regolarizzazion
     }
 \end{lstlisting}
 Ottendendo i seguenti risultati:
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{C}& 1 & 100\\
-\textbf{epsilon}& 0.01 &  0.01 \\
-\textbf{gamma}& 0.01 & 0.001\\
-\textbf{kernel}& 'rbf' &  'rbf'\\
-\hline
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{C}& 1 & 100\\
+    \textbf{epsilon}& 0.01 &  0.01 \\
+    \textbf{gamma}& 0.01 & 0.001\\
+    \textbf{kernel}& 'rbf' &  'rbf'\\
+    \hline
 \end{tabular}
 \end{table}
 Come per il modello precedente riportiamo il grafico dell'andamento dei parametri e del Mean Test Score:
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics{hpSVR.png}
+    \includegraphics[width=.9\textwidth]{hpSVR.png}
 \end{figure}
 \subsection{KNN}
-KNN é un algoritmo di ML supervisionato che permette di effettuare una regressione sui dati trovando il target predetto da un interpolazione locale dei target associati ai k piu vicini.
+KNN è un algoritmo di ML supervisionato che permette di effettuare una regressione sui dati trovando il target predetto da un interpolazione locale dei target associati ai k piu vicini.
 Abbiamo effettuato il tuning di parametri:
 \begin{lstlisting}[language=Python]
     self.params = {
@@ -180,16 +184,16 @@ Abbiamo effettuato il tuning di parametri:
     }
 \end{lstlisting}
 Con i seguenti risultati:
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{algorithm}& ball\_tree & ball\_tree\\
-\textbf{leaf\_size}& 10 &  10 \\
-\textbf{n\_neighbors}& 13 & 13\\
-\textbf{weights}& 'distance' &  'distance'\\
-\hline
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{algorithm}& ball\_tree & ball\_tree\\
+    \textbf{leaf\_size}& 10 &  10 \\
+    \textbf{n\_neighbors}& 13 & 13\\
+    \textbf{weights}& 'distance' &  'distance'\\
+    \hline
 \end{tabular}
 \end{table}
 
@@ -224,24 +228,24 @@ I parametri che abbiamo utilizzato sono:
     }
 \end{lstlisting}
 I risultati ottenuti sono:
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{batchsize}& 1024 & 256\\
-\textbf{hidden\_size1}& 256 &  128 \\
-\textbf{hidden\_size2}& 256 & 256\\
-\textbf{lr}& 0.01 &  0.001\\
-\textbf{num\_epochs}& 400 & 600\\
-\hline
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{batchsize}& 1024 & 256\\
+    \textbf{hidden\_size1}& 64 &  128 \\
+    \textbf{hidden\_size2}& 256 & 256\\
+    \textbf{lr}& 0.01 &  0.001\\
+    \textbf{num\_epochs}& 400 & 600\\
+    \hline
 \end{tabular}
 \end{table}
 
 Visualizziamo il grafico dell'andamento dei parametri e del Mean Test Score:
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics{hpNN.png}
+    \includegraphics[width=.9\textwidth]{hpNN.png}
     \caption{Andamento dei parametri e del Mean Test Score per la Rete Neurale (senza PCA)}
 \end{figure}
 
@@ -254,27 +258,27 @@ Per quanto riguarda i Tabular Data abbiamo fatto il tuning dei seguenti iperpara
     learning_rate = [2e-2,1e-2,5e-3]    
     max_epochs = [70,120,150,210]
 \end{lstlisting}
-dove $width$ corrisponde a $n\_d$ e $n\_a$ dove $n\_d$ é la Larghezza del livello di previsione delle decisioni($n_a$ nella documentazione viene consigliato sia uguale a $n_d$, per questo motivo utilizziamo un singolo valore).
+dove $width$ corrisponde a $n\_d$ e $n\_a$ dove $n\_d$ è la Larghezza del livello di previsione delle decisioni($n_a$ nella documentazione viene consigliato sia uguale a $n_d$, per questo motivo utilizziamo un singolo valore).
 Viene fatto uso di Early Stopping per evitare l'overfitting.
 I risultati ottenuti sono:
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-\textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
-\textbf{batchsize}& 2048 & -\\
-\textbf{width}& 8 &  - \\
-\textbf{steps}& 5 & -\\
-\textbf{learning\_rate}& 0.02 &  -\\
-\textbf{max\_epochs}& 210 & -\\
-\hline
-\end{tabular}
+    \textbf{Parametri} & \textbf{senza PCA} & \textbf{PCA} \\ \hline
+    \textbf{batchsize}& 512 & 512 \\
+    \textbf{width}& 32 & 32\\
+    \textbf{steps}& 7 & 5\\
+    \textbf{learning\_rate}&  0.02 & 0.02 \\
+    \textbf{max\_epochs}& 70& 150 \\
+    \hline
+    \end{tabular}
 \end{table}
 
 Con un andamento degli iperparametri e del Mean Test Score come segue:
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics{hpTabular.png}
+    \includegraphics[width=.9\textwidth]{hpTabular.png}
     \caption{Andamento dei parametri e del Mean Test Score per i Tabular Data (senza PCA)}
 \end{figure}
 \end{document}

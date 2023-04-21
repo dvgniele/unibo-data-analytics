@@ -6,7 +6,7 @@
 
 \section{Data Acquisition}
 In uno studio di Data Analysis, lo step di Data Acquisition è il primo della pipeline da seguire.
-In questa fase abbiamo raccolto i dati necessari dal dataset \cite[MovieLens]{MovieLens}.
+In questa fase abbiamo raccolto i dati necessari dal dataset \cite{movielens}.
 I file sono stati raccolti in una cartella denominata \texttt{ml-25m} contente un README.
 
 
@@ -14,14 +14,14 @@ I file sono stati raccolti in una cartella denominata \texttt{ml-25m} contente u
 \label{dataset}
 
 Movielens è un Recomendation System per contenuti multimediali, quali film, serie tv, documentari ecc.
-Movielens mette a disposizione degli sviluppatori un dataset opensource, generator dal database TMDB (The Movie Database).
+Movielens mette a disposizione degli sviluppatori un dataset opensource, generator dal database TMDB (The Movie Database)\cite{tmdb}.
 Questo datasedt contiene recensioni con voti e tag di oltre 60.000 film, raccolte da oltre 150.000 utenti durante il periodo che va dal 1995 fino al 2019.
 \\
 Il dataset è composto dai seguenti file:
 \begin{itemize}
     \item \textit{genome-scores.csv}: contiene il \textit{relevance score} di ogni tag per tutti i film (ovvero, quanto un tag è importante per il dato film).
     \item \textit{genome-tags.csv}: contiene tutti i tag presenti all'interno del dataset.
-    \item \textit{links.csv}: contiene gli ID di ogni film per i due database TMBD e IMDB.
+    \item \textit{links.csv}: contiene gli ID di ogni film per i due database TMBD e IMDB\cite{imdb}.
     \item \textit{movies.csv}: contiene i titoli dei film, con i rispettivi generi.
     \item \textit{ratings.csv}: contiene più di 25.000.000 votazioni provenienti dalle recensioni degli utenti.
     \item \textit{tags.csv}: contiene i tag che sono stati assegnati ai film dagli utenti nelle rispettivi recensioni.
@@ -30,7 +30,7 @@ Il dataset è composto dai seguenti file:
 Per il nostro caso di studio, non abbiamo fatto uso di tutti i file disponibili, ma esclusivamente quelli che abbiamo considerato adatti per lo scopo.
 Di seguito viene mostrata la struttura dei tali.
 \\
-Il dataset \textit{\textbf{ratings}} eèstato selezionato per poter far uso dei voti assegnati ai film dagli utenti, per poter quindi ottenere il voto mediio di tali film.
+Il dataset \textit{\textbf{ratings}} è stato selezionato per poter far uso dei voti assegnati ai film dagli utenti, per poter quindi ottenere il voto mediio di tali film.
 La struttura è la seguente
 \begin{table}[H]
     \centering
@@ -133,8 +133,5 @@ Tuttavia, esistono alcune differenze tra i voti attribuiti dai generi, con alcun
 Ad esempio, il genere "commedia" sembra essere valutato in modo più positivo rispetto al genere "drammatico". 
 Questi risultati potrebbero suggerire che le preferenze personali dei valutatori infuenzano le loro valutazioni, oltre alle caratteristiche del film stesso.
 
-
-
-\section{Tabular Data}
 
 \end{document}
